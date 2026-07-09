@@ -19,12 +19,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 
 export default function SignInPage() {
   const [state, dispatchAction, isPending] = useActionState(signIn, {});
 
   return (
-    <Card className="w-full sm:max-w-md">
+    <Card className="w-full sm:max-w-md ring-0">
       <CardHeader>
         <CardTitle>Sign In</CardTitle>
         <CardDescription>Access your dashboard account.</CardDescription>
@@ -69,9 +70,15 @@ export default function SignInPage() {
               <AlertDescription>{state.error}</AlertDescription>
             </Alert>
           ) : null}
-          <Button type="submit" disabled={isPending}>
+          <Button className="w-full" type="submit" disabled={isPending}>
             {isPending ? "Signing in..." : "Sign in"}
           </Button>
+          <p className="text-sm text-muted-foreground">
+            Don&apos;t have an account?{" "}
+            <Link href="/auth/sign-up" className="underline">
+              Sign up
+            </Link>
+          </p>
         </form>
       </CardContent>
     </Card>
